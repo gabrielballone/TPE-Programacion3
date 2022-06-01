@@ -1,19 +1,7 @@
-import java.util.HashSet;
-
+import java.util.LinkedList;
 public class App {
     public static void main(String[] args) throws Exception {
-        Genre policial = new Genre("policial");
-        Genre arte = new Genre("arte");
-        Genre ciencia = new Genre("ciencia");
-        HashSet<Genre> GenresSet = new HashSet<Genre>();
-        GenresSet.add(policial);
-        GenresSet.add(arte);
-        GenresSet.add(ciencia);
-
-        Book book1 = new Book("Una muerte!");
-        book1.addGenre(policial);
-        
-        System.out.println(GenresSet);
-        System.out.println(book1);
+        LinkedList<Genre> lista = CSVReader.readCSV("C:\\Users\\Gabriel\\Google Drive\\TUDAI\\3er Año\\Programacion3\\TPE\\TPE-Programacion3\\dataset1.csv");
+        System.out.println("");        
     }
 }

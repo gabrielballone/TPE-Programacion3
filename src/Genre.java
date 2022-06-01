@@ -29,4 +29,20 @@ public class Genre {
     public String toString() {
         return getName();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Genre)) {
+            if (o instanceof String){
+                String genre = (String) o;
+                return this.name.equals(genre);
+            }
+            return false;
+        }
+        Genre genre = (Genre) o;
+        return this.name.equals(genre.getName());
+    }
 }

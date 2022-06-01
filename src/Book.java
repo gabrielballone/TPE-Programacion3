@@ -2,9 +2,9 @@
 public class Book {
     private String title;
     private String author;
-    private int pageCount;
+    private String pageCount;
     
-    public Book(String title, String author, int pages) {
+    public Book(String title, String author, String pages) {
         this.title = title;
         this.author = author;
         this.pageCount = pages;       
@@ -26,11 +26,11 @@ public class Book {
         this.author = author;
     }
 
-    public int getPageCount() {
+    public String getPageCount() {
         return pageCount;
     }
 
-    public void setPageCount(int pageCount) {
+    public void setPageCount(String pageCount) {
         this.pageCount = pageCount;
     }
 
