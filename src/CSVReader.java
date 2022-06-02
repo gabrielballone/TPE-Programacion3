@@ -24,7 +24,7 @@ public class CSVReader {
                 String pagesCount = items[2];
                 String genresString = items[3];
                 String[] genres = genresString.split(" ");
-                Book book = new Book(title, author, pagesCount);
+                Book book = new Book(title, author, pagesCount, genresString);
                 boolean found = false;
                 for (String genre : genres) {
                     for (Genre genreL : genreList) {

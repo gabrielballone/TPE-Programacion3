@@ -3,11 +3,13 @@ public class Book {
     private String title;
     private String author;
     private String pageCount;
+    private String genres;
     
-    public Book(String title, String author, String pages) {
+    public Book(String title, String author, String pageCount, String genres) {
         this.title = title;
         this.author = author;
-        this.pageCount = pages;       
+        this.pageCount = pageCount;
+        this.genres = genres;
     }
 
     public String getTitle() {
@@ -34,6 +36,14 @@ public class Book {
         this.pageCount = pageCount;
     }
 
+    public String getGenres() {
+        return genres;
+    }
+
+    public void setGenres(String genres) {
+        this.genres = genres;
+    }
+    
     @Override
     public String toString() {
         return getTitle() + " , " + getAuthor() + " , " + getPageCount();
