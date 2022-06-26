@@ -13,7 +13,7 @@ public class App {
             }
         }
         if (selectedGenre != null) {
-            CSVWritter.writeCSV(selectedGenre.getBooks(), inputPath);
+            CSVWritter.writeCSV(selectedGenre.getBooks(), outputPath);
         }
     }
 }
