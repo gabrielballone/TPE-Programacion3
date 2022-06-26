@@ -21,7 +21,7 @@ public class CSVReader {
                 String[] items = line.split(cvsSplitBy);
                 String title = items[0];
                 String author = items[1];
-                String pagesCount = items[2];
+                int pagesCount = Integer.parseInt(items[2]);
                 String genresString = items[3];
                 String[] genres = genresString.split(" ");
                 Book book = new Book(title, author, pagesCount, genresString);

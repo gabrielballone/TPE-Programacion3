@@ -19,7 +19,7 @@ public class CSVWritter {
             for (Book book : booksList) {
                 String title = book.getTitle();
                 String author = book.getAuthor();
-                String pages = book.getPageCount();
+                int pages = book.getPageCount();
                 String genres = book.getGenres();
                 String lineToPrint = String.format("%s,%s,%s,%s", title, author, pages, genres);                
                 bw.write(lineToPrint);
