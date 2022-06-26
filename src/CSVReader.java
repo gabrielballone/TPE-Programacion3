@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.LinkedList;
 
 public class CSVReader {
@@ -24,7 +25,7 @@ public class CSVReader {
                 int pagesCount = Integer.parseInt(items[2]);
                 String genresString = items[3];
                 String[] genres = genresString.split(" ");
-                Book book = new Book(title, author, pagesCount, genresString);
+                Book book = new Book(title, author, pagesCount, Arrays.asList(genres));
                 boolean found = false;
                 for (String genre : genres) {
                     for (Genre genreL : genreList) {

@@ -1,11 +1,12 @@
+import java.util.List;
 
 public class Book {
     private String title;
     private String author;
     private int pageCount;
-    private String genres;
+    private List<String> genres;
     
-    public Book(String title, String author, int pageCount, String genres) {
+    public Book(String title, String author, int pageCount, List<String> genres) {
         this.title = title;
         this.author = author;
         this.pageCount = pageCount;
@@ -36,13 +37,13 @@ public class Book {
         this.pageCount = pageCount;
     }
 
-    public String getGenres() {
+    public List<String> getGenres() {
         return genres;
     }
 
-    public void setGenres(String genres) {
-        this.genres = genres;
-    }
+    // public void setGenre(String genre) {
+    //     this.genres.add(genre);
+    // }
     
     @Override
     public String toString() {
