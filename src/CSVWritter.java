@@ -6,24 +6,18 @@ import java.util.LinkedList;
 
 public class CSVWritter {
 
-    public static void writeCSV(LinkedList<Book> booksList, String filePath) {
+    public static void writeCSV(String filePathRelative, LinkedList<String> lines) {
         BufferedWriter bw = null;
         try {
-            File file = new File(filePath);
+            File file = new File(filePathRelative);
             if (!file.exists()) {
                 file.createNewFile();
             }
-
             FileWriter fw = new FileWriter(file);
             bw = new BufferedWriter(fw);
-            for (Book book : booksList) {
-                String title = book.getTitle();
-                String author = book.getAuthor();
-                int pages = book.getPageCount();
-                String genres = String.join(" ", book.getGenres());                ;
-                String lineToPrint = String.format("%s,%s,%s,%s", title, author, pages, genres);                
-                bw.write(lineToPrint);
-                bw.newLine();                
+            for (String line : lines) {
+                bw.write(line);
+                bw.newLine(); 
             }
         } catch (IOException ioe) {
             ioe.printStackTrace();

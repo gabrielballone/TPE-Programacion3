@@ -46,7 +46,17 @@ public class App {
             }
         }
         if (selectedGenre != null) {
-            CSVWritter.writeCSV(selectedGenre.getBooks(), outputPath);
+            LinkedList<Book> booksList = selectedGenre.getBooks();
+            LinkedList<String> linesToWrite = new LinkedList<String>();
+            for (Book book : booksList) {
+                String title = book.getTitle();
+                String author = book.getAuthor();
+                int pages = book.getPageCount();
+                String genres = String.join(" ", book.getGenres());                ;
+                String lineToWrite = String.format("%s,%s,%s,%s", title, author, pages, genres);                               
+                linesToWrite.add(lineToWrite);
+            }
+            CSVWritter.writeCSV(outputPath, linesToWrite);
         }
     }
 
