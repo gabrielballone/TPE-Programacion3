@@ -55,6 +55,23 @@ public class App {
         final String outputPath = "tpe2\\result1.csv";
         LinkedList<String> genresLines = CSVReader.readCSV(inputPath);
         DirectedGraph<Integer> graph = new DirectedGraph<Integer>();
-
+        for (String line : genresLines) {
+            String[] genres = line.split(cvsSplitBy);
+            String lastGenre = null;
+            for (String genre : genres) {
+                if(!graph.containsVertex(genre))
+                    graph.addVertex(genre);
+                if (lastGenre != null){
+                    Arc<Integer> arc = graph.getArc(lastGenre, genre);
+                    if (arc == null){
+                        graph.addArc(lastGenre, genre, 1);
+                    } else {
+                        arc.setLabel(arc.getLabel() + 1);
+                    }
+                }
+                lastGenre = genre;
+            }
+        }
+        
     }
 }

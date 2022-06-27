@@ -22,6 +22,10 @@ public class Arc<T> {
         return label;
     }
 
+    public void setLabel(T label) {
+        this.label = label;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
