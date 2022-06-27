@@ -53,6 +53,7 @@ public class App {
     public static void stage2() {
         final String inputPath = "tpe2\\dataset1.csv";
         final String outputPath = "tpe2\\result1.csv";
+        LinkedList<String> genresLines = CSVReader.readCSV(inputPath);
         DirectedGraph<Integer> graph = new DirectedGraph<Integer>();
 
     }

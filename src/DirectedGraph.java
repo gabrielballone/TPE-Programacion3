@@ -4,41 +4,41 @@ import java.util.Iterator;
 
 public class DirectedGraph<T> implements Graph<T> {
 
-    private HashSet<Integer> vertexes;
+    private HashSet<String> vertexes;
     private HashSet<Arc<T>> arcs;
 
     @Override
-    public void addVertex(int vertexId) {
+    public void addVertex(String vertexId) {
         vertexes.add(vertexId);
     }
 
     @Override
-    public void deleteVertex(int vertexId) {
+    public void deleteVertex(String vertexId) {
         vertexes.remove(vertexId);
     }
 
     @Override
-    public void addArc(int vertexId1, int vertexId2, T label) {
+    public void addArc(String vertexId1, String vertexId2, T label) {
         arcs.add(new Arc<T>(vertexId1, vertexId2, label));
     }
 
     @Override
-    public void deleteArc(int vertexId1, int vertexId2) {
+    public void deleteArc(String vertexId1, String vertexId2) {
         vertexes.remove(new Arc<T>(vertexId1, vertexId2, null));
     }
 
     @Override
-    public boolean containsVertex(int vertexId) {
+    public boolean containsVertex(String vertexId) {
         return vertexes.contains(vertexId);
     }
 
     @Override
-    public boolean containsArc(int vertexId1, int vertexId2) {
+    public boolean containsArc(String vertexId1, String vertexId2) {
         return arcs.contains(new Arc<T>(vertexId1, vertexId2, null));
     }
 
     @Override
-    public Arc<T> getArc(int vertexId1, int vertexId2) {
+    public Arc<T> getArc(String vertexId1, String vertexId2) {
         for (var arc: arcs)
             if (arc.equals(new Arc<T>(vertexId1, vertexId2, null)))
                 return arc;
@@ -56,13 +56,13 @@ public class DirectedGraph<T> implements Graph<T> {
     }
 
     @Override
-    public Iterator<Integer> getVertexes() {
+    public Iterator<String> getVertexes() {
         return vertexes.iterator();
     }
 
     @Override
-    public Iterator<Integer> getAdjacent(int vertexId) {
-        var adjacent = new ArrayList<Integer>();
+    public Iterator<String> getAdjacent(String vertexId) {
+        var adjacent = new ArrayList<String>();
         for (var arc: arcs)
             if (arc.getOriginVertex() == vertexId)
                 adjacent.add(arc.getDestinyVertex());
@@ -75,7 +75,7 @@ public class DirectedGraph<T> implements Graph<T> {
     }
 
     @Override
-    public Iterator<Arc<T>> getArcs(int vertexId) {
+    public Iterator<Arc<T>> getArcs(String vertexId) {
         var arcsFromVertex = new ArrayList<Arc<T>>();
         for (var arc: arcs)
             if (arc.getOriginVertex() == vertexId)
