@@ -1,4 +1,4 @@
-public class Arc<T> {
+public class Arc<T extends Comparable<T>> implements Comparable<Arc<T>> {
 
     private String originVertex;
     private String destinyVertex;
@@ -55,6 +55,11 @@ public class Arc<T> {
         } else if (!originVertex.equals(other.originVertex))
             return false;
         return true;
+    }
+
+    @Override
+    public int compareTo(Arc<T> o) {
+        return this.label.compareTo(o.getLabel());
     }
 
 }

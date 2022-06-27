@@ -2,10 +2,15 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 
-public class DirectedGraph<T> implements Graph<T> {
+public class DirectedGraph<T extends Comparable<T>> implements Graph<T> {
 
     private HashSet<String> vertexes;
     private HashSet<Arc<T>> arcs;
+
+    public DirectedGraph(){
+        this.vertexes = new HashSet<String>();
+        this.arcs = new HashSet<Arc<T>>();
+    }
 
     @Override
     public void addVertex(String vertexId) {
@@ -78,7 +83,7 @@ public class DirectedGraph<T> implements Graph<T> {
     public Iterator<Arc<T>> getArcs(String vertexId) {
         var arcsFromVertex = new ArrayList<Arc<T>>();
         for (var arc: arcs)
-            if (arc.getOriginVertex() == vertexId)
+            if (arc.getOriginVertex().equals(vertexId))
                 arcsFromVertex.add(arc);
         return arcsFromVertex.iterator();
     }

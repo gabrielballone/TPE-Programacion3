@@ -5,8 +5,8 @@ public class App {
     static final String cvsSplitBy = ",";
 
     public static void main(String[] args) throws Exception {
-        stage1();
-        //stage2();
+        //stage1();
+        stage2();
     }
 
     public static void stage1() {
@@ -51,27 +51,10 @@ public class App {
     }
 
     public static void stage2() {
-        final String inputPath = "tpe2\\dataset1.csv";
-        final String outputPath = "tpe2\\result1.csv";
+        final String inputPath = "tpe2\\dataset2.csv";
+        final String outputPath = "tpe2\\result2.csv";
         LinkedList<String> genresLines = CSVReader.readCSV(inputPath);
-        DirectedGraph<Integer> graph = new DirectedGraph<Integer>();
-        for (String line : genresLines) {
-            String[] genres = line.split(cvsSplitBy);
-            String lastGenre = null;
-            for (String genre : genres) {
-                if(!graph.containsVertex(genre))
-                    graph.addVertex(genre);
-                if (lastGenre != null){
-                    Arc<Integer> arc = graph.getArc(lastGenre, genre);
-                    if (arc == null){
-                        graph.addArc(lastGenre, genre, 1);
-                    } else {
-                        arc.setLabel(arc.getLabel() + 1);
-                    }
-                }
-                lastGenre = genre;
-            }
-        }
-        
+        DirectedGraph<Integer> graph = Stage2.generateGraph(genresLines);
+        LinkedList<String> mostSearchedGenres = Stage2.getMostSearchesGenresAfterAGenre(graph, "infantil", 3);
     }
 }

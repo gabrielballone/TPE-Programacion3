@@ -1,6 +1,6 @@
 import java.util.Iterator;
 
-public interface Graph<T> {
+public interface Graph<T extends Comparable<T>> {
 
     // Adds a vertex
     public void addVertex(String vertexId);
