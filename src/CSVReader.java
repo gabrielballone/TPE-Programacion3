@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
@@ -6,13 +7,12 @@ import java.util.LinkedList;
 
 public class CSVReader {
 
-    public static LinkedList<Genre> readCSV(String filePath) {
-        String csvFile = filePath;
+    public static LinkedList<Genre> readCSV(String filePathRelative) {
+        String filePathAbsolute = new File("").getAbsolutePath();
         String line = "";
         String cvsSplitBy = ",";
         LinkedList<Genre> genreList = new LinkedList<Genre>();
-
-        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePathAbsolute + "\\" + filePathRelative))) {
             boolean isFirstLine = true;
             while ((line = br.readLine()) != null) {
                 if (isFirstLine) {
