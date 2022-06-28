@@ -26,6 +26,8 @@ public class App {
         CSVWritter.writeCSV(outputPathEx1, mostSearchedGenres);
         LinkedList<String> sequenceWithHigherSearchRatio = Stage2.getSequenceWithHigherSearchRatio(graph, "infantil");
         CSVWritter.writeCSV(outputPathEx2, sequenceWithHigherSearchRatio);
-        
+        DirectedGraph<Integer> graphWithAffinedGenres = Stage2.getGraphWithAffinedGenres(graph, "infantil");
+        // CSVWritter.writeCSV(outputPathEx3, graphWithAffinedGenres);
+
     }
 }

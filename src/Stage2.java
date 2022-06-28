@@ -1,5 +1,5 @@
-import java.lang.module.ResolutionException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -66,5 +66,36 @@ public final class Stage2 {
             }
         }
         return higherRatioSequence;
+    }
+
+    public static DirectedGraph<Integer> getGraphWithAffinedGenres(DirectedGraph<Integer> graph, String genre) {
+        DirectedGraph<Integer> graphToReturn = new DirectedGraph<Integer>();
+        // recorrer el grafo con DFS buscando ciclos        
+        // cuando el método de DFS encuentra un ciclo tiene que agregar todos los vertices y arcos grafo a devolver graphToReturn        
+        return graphToReturn;
+    }
+
+    private static void DFS(DirectedGraph<Integer> graph, String startVertex) {
+        HashMap<String,String> visitedVertexes = new HashMap<String,String>();
+        var vertexes = graph.getVertexes();
+        while (vertexes.hasNext()) {
+            var vertex = vertexes.next();
+            visitedVertexes.put(vertex, "WHITE");
+        }        
+        DFSVisit(graph, visitedVertexes, startVertex);    
+    }
+
+    private static void DFSVisit(DirectedGraph<Integer> graph, HashMap<String, String> visitedVertexes, String vertex) {
+        visitedVertexes.put(vertex, "YELLOW");
+        var i = graph.getAdjacent(vertex);
+        while (i.hasNext()) {
+            String adjacentVertex = i.next();
+            if (visitedVertexes.get(adjacentVertex) == "WHITE")
+                DFSVisit(graph, visitedVertexes, adjacentVertex);
+            else if (visitedVertexes.get(adjacentVertex) == "YELLOW") {   
+                // has cicle             
+            }
+        }
+        visitedVertexes.put(vertex, "BLACK");
     }
 }
