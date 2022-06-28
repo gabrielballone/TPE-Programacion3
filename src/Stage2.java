@@ -1,3 +1,4 @@
+import java.lang.module.ResolutionException;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -42,5 +43,28 @@ public final class Stage2 {
             genresToReturn.add(arc.getDestinyVertex());
         }
         return genresToReturn;
+    }
+
+    public static LinkedList<String> getSequenceWithHigherSearchRatio(DirectedGraph<Integer> graph, String genre) {
+        LinkedList<String> higherRatioSequence = new LinkedList<String>();
+        higherRatioSequence.addLast(genre);
+        boolean existsVertex = false;
+        while (graph.getArcs(higherRatioSequence.getLast()).hasNext() && !existsVertex) {
+            Iterator<Arc<Integer>> arcs = graph.getArcs(higherRatioSequence.getLast());
+            Arc<Integer> higherArc = null;
+            while (arcs.hasNext()) {
+                Arc<Integer> currentArc = arcs.next();
+                if ((higherArc == null || currentArc.getLabel() > higherArc.getLabel()) &&
+                    !higherRatioSequence.contains(currentArc.getDestinyVertex())) {
+                    higherArc = currentArc;
+                }
+            }
+            if (higherArc != null) {
+                higherRatioSequence.addLast(higherArc.getDestinyVertex());
+            } else {
+                existsVertex = true;
+            }
+        }
+        return higherRatioSequence;
     }
 }
