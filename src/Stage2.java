@@ -1,11 +1,14 @@
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 
 public final class Stage2 {
 
     static final String cvsSplitBy = ",";
+    static HashSet<Arc<Integer>> affinedArcsSolution = new HashSet<Arc<Integer>>();
+    static String genreA = null;
 
     public static DirectedGraph<Integer> generateGraph(LinkedList<String> genresLines) {
         DirectedGraph<Integer> graph = new DirectedGraph<Integer>();
@@ -70,32 +73,52 @@ public final class Stage2 {
 
     public static DirectedGraph<Integer> getGraphWithAffinedGenres(DirectedGraph<Integer> graph, String genre) {
         DirectedGraph<Integer> graphToReturn = new DirectedGraph<Integer>();
-        // recorrer el grafo con DFS buscando ciclos        
-        // cuando el método de DFS encuentra un ciclo tiene que agregar todos los vertices y arcos grafo a devolver graphToReturn        
+        Stage2.genreA = genre;
+        var arcs = graph.getArcs(Stage2.genreA);
+        while (arcs.hasNext()) {
+            Arc<Integer> arc = arcs.next();
+            boolean foundCicle = DFS(graph, arc);
+            if (foundCicle) {
+                var arcsToReturn = affinedArcsSolution.iterator();
+                while (arcsToReturn.hasNext()) {
+                    var arcToReturn = arcsToReturn.next();
+                    graphToReturn.addArc(arcToReturn.getOriginVertex(), arcToReturn.getDestinyVertex(), arcToReturn.getLabel());
+                    graphToReturn.addVertex(arcToReturn.getOriginVertex());
+                    graphToReturn.addVertex(arcToReturn.getDestinyVertex());
+                }
+            }
+            affinedArcsSolution = new HashSet<Arc<Integer>>();
+        }
         return graphToReturn;
     }
 
-    private static void DFS(DirectedGraph<Integer> graph, String startVertex) {
+    private static boolean DFS(DirectedGraph<Integer> graph, Arc<Integer> arc) {
         HashMap<String,String> visitedVertexes = new HashMap<String,String>();
         var vertexes = graph.getVertexes();
         while (vertexes.hasNext()) {
             var vertex = vertexes.next();
             visitedVertexes.put(vertex, "WHITE");
-        }        
-        DFSVisit(graph, visitedVertexes, startVertex);    
+        }
+        return DFSVisit(graph, visitedVertexes, arc);
     }
 
-    private static void DFSVisit(DirectedGraph<Integer> graph, HashMap<String, String> visitedVertexes, String vertex) {
-        visitedVertexes.put(vertex, "YELLOW");
-        var i = graph.getAdjacent(vertex);
-        while (i.hasNext()) {
-            String adjacentVertex = i.next();
-            if (visitedVertexes.get(adjacentVertex) == "WHITE")
-                DFSVisit(graph, visitedVertexes, adjacentVertex);
-            else if (visitedVertexes.get(adjacentVertex) == "YELLOW") {   
-                // has cicle             
+    private static boolean DFSVisit(DirectedGraph<Integer> graph, HashMap<String, String> visitedVertexes, Arc<Integer> currentArc) {
+        visitedVertexes.put(currentArc.getDestinyVertex(), "YELLOW");
+        var arcs = graph.getArcs(currentArc.getDestinyVertex());
+        while (arcs.hasNext()) {
+            Arc<Integer> arc = arcs.next();
+            if (arc.getDestinyVertex().equals(Stage2.genreA)) {
+                Stage2.affinedArcsSolution.add(arc);
+                return true;
+            }
+            else if (visitedVertexes.get(arc.getDestinyVertex()) == "WHITE"){
+                Stage2.affinedArcsSolution.add(arc);
+                if (DFSVisit(graph, visitedVertexes, arc))
+                    return true;
             }
         }
-        visitedVertexes.put(vertex, "BLACK");
+        Stage2.affinedArcsSolution.remove(currentArc);
+        visitedVertexes.put(currentArc.getDestinyVertex(), "BLACK");
+        return false;
     }
 }
