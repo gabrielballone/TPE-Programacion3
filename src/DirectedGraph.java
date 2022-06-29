@@ -87,4 +87,16 @@ public class DirectedGraph<T extends Comparable<T>> implements Graph<T> {
                 arcsFromVertex.add(arc);
         return arcsFromVertex.iterator();
     }
+
+    @Override
+    public String toString() {
+        var stringToReturn = "digraph G {";
+        var it = this.arcs.iterator();
+        while (it.hasNext()){
+            var arc = it.next();
+            stringToReturn = stringToReturn + arc.getOriginVertex() + "->" + arc.getDestinyVertex() + ";";
+        }
+        stringToReturn = stringToReturn + "}";
+        return stringToReturn;
+    }
 }
