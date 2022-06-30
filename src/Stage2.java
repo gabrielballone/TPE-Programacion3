@@ -51,8 +51,8 @@ public class Stage2 {
     public static LinkedList<String> getSequenceWithHigherSearchRatio(DirectedGraph<Integer> graph, String genre) {
         LinkedList<String> higherRatioSequence = new LinkedList<String>();
         higherRatioSequence.addLast(genre);
-        boolean existsVertex = false;
-        while (graph.getArcs(higherRatioSequence.getLast()).hasNext() && !existsVertex) {
+        boolean onlyRepeatedVertexesLeft = false;
+        while (graph.getArcs(higherRatioSequence.getLast()).hasNext() && !onlyRepeatedVertexesLeft) {
             Iterator<Arc<Integer>> arcs = graph.getArcs(higherRatioSequence.getLast());
             Arc<Integer> higherArc = null;
             while (arcs.hasNext()) {
@@ -65,7 +65,7 @@ public class Stage2 {
             if (higherArc != null) {
                 higherRatioSequence.addLast(higherArc.getDestinyVertex());
             } else {
-                existsVertex = true;
+                onlyRepeatedVertexesLeft = true;
             }
         }
         return higherRatioSequence;

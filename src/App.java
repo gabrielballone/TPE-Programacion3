@@ -16,7 +16,7 @@ public class App {
     }
 
     public static void stage2() {
-        final String inputPath = "tpe2\\dataset1.csv";
+        final String inputPath = "tpe2\\dataset2.csv";
         final String outputPathEx1 = "tpe2\\result1_1.csv";
         final String outputPathEx2 = "tpe2\\result1_2.csv";
         LinkedList<String> genresLines = CSVReader.readCSV(inputPath);
