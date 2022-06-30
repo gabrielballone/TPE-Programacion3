@@ -77,9 +77,9 @@ public class Stage2 {
         var arcs = graph.getArcs(Stage2.genreA);
         while (arcs.hasNext()) {
             Arc<Integer> arc = arcs.next();
-            affinedArcsSolution.add(arc);
             boolean foundCicle = DFS(graph, arc);
             if (foundCicle) {
+                affinedArcsSolution.add(arc);
                 var arcsToReturn = affinedArcsSolution.iterator();
                 while (arcsToReturn.hasNext()) {
                     var arcToReturn = arcsToReturn.next();
