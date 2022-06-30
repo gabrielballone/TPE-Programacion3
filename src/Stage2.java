@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public final class Stage2 {
+public class Stage2 {
 
     static final String cvsSplitBy = ",";
     static HashSet<Arc<Integer>> affinedArcsSolution = new HashSet<Arc<Integer>>();
