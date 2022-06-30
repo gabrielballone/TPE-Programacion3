@@ -32,7 +32,7 @@ public final class Stage2 {
         return graph;
     }
 
-    public static LinkedList<String> getMostSearchesGenresAfterAGenre(DirectedGraph<Integer> graph, String genre, int amount) {
+    public static LinkedList<String> getMostSearchedGenresAfterAGenre(DirectedGraph<Integer> graph, String genre, int amount) {
         LinkedList<String> genresToReturn = new LinkedList<String>();
         Iterator<Arc<Integer>> arcs = graph.getArcs(genre);
         LinkedList<Arc<Integer>> sortedArcs = new LinkedList<Arc<Integer>>();

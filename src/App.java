@@ -16,13 +16,12 @@ public class App {
     }
 
     public static void stage2() {
-        final String inputPath = "tpe2\\dataset2.csv";
-        final String outputPathEx1 = "tpe2\\result2_1.csv";
-        final String outputPathEx2 = "tpe2\\result2_2.csv";
-        // final String outputPathEx3 = "tpe2\\result2_3.csv";
+        final String inputPath = "tpe2\\dataset1.csv";
+        final String outputPathEx1 = "tpe2\\result1_1.csv";
+        final String outputPathEx2 = "tpe2\\result1_2.csv";
         LinkedList<String> genresLines = CSVReader.readCSV(inputPath);
         DirectedGraph<Integer> graph = Stage2.generateGraph(genresLines);
-        LinkedList<String> mostSearchedGenres = Stage2.getMostSearchesGenresAfterAGenre(graph, "infantil", 3);
+        LinkedList<String> mostSearchedGenres = Stage2.getMostSearchedGenresAfterAGenre(graph, "infantil", 3);
         CSVWritter.writeCSV(outputPathEx1, mostSearchedGenres);
         LinkedList<String> sequenceWithHigherSearchRatio = Stage2.getSequenceWithHigherSearchRatio(graph, "infantil");
         CSVWritter.writeCSV(outputPathEx2, sequenceWithHigherSearchRatio);
